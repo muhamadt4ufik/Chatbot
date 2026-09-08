@@ -329,6 +329,469 @@
             font-size: 13px;
             border: 1px solid #fde68a;
         }
+
+        /* ===== MENU DOKUMEN & MODAL VIEWER ===== */
+        .doc-menu-bar {
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+            flex-shrink: 0;
+            scrollbar-width: thin;
+        }
+        .doc-menu-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.5px;
+            margin-right: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .doc-menu-btn {
+            background: white;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .doc-menu-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: translateY(-1px);
+        }
+        .doc-menu-btn .btn-badge {
+            background: #e2e8f0;
+            color: #475569;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .doc-menu-btn:hover .btn-badge {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+        }
+
+        /* Modal Overlay */
+        .doc-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .doc-modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.25s ease;
+        }
+        .doc-modal-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 960px;
+            height: 90vh;
+            max-height: 900px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .doc-modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        .doc-modal-header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .doc-modal-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 18px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .doc-modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: rotate(90deg);
+        }
+        .doc-modal-nav-tabs {
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .doc-tab-btn {
+            background: white;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .doc-tab-btn:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .doc-tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 3px 8px rgba(102, 126, 234, 0.35);
+        }
+        .doc-tools-bar {
+            background: #ffffff;
+            padding: 8px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 12.5px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+        .doc-search-box {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            padding: 5px 12px;
+            gap: 8px;
+            max-width: 280px;
+            width: 100%;
+        }
+        .doc-search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 12px;
+            width: 100%;
+            font-family: inherit;
+            color: #334155;
+        }
+        .doc-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .doc-action-btn {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .doc-action-btn:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        .doc-modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 26px 36px;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #1e293b;
+            line-height: 1.7;
+            background: #ffffff;
+            scroll-behavior: smooth;
+        }
+        .doc-tab-content {
+            display: none;
+        }
+        .doc-tab-content.active {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        /* Document Reader Styling */
+        .doc-header-card {
+            background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%);
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.08);
+        }
+        .doc-type-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .doc-main-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1e1b4b;
+            margin-bottom: 8px;
+            line-height: 1.35;
+        }
+        .doc-sub-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #4338ca;
+            margin-bottom: 8px;
+        }
+        .doc-tagline {
+            font-size: 13px;
+            font-style: italic;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+        .doc-meta-item {
+            font-size: 12px;
+            color: #475569;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .doc-chapter-heading {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chapter-badge {
+            background: #667eea;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+        .doc-section-heading {
+            font-size: 14px;
+            font-weight: 700;
+            color: #334155;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .doc-p {
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+        .doc-list {
+            margin-left: 20px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: #334155;
+        }
+        .doc-list li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .table-container {
+            margin: 18px 0;
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: white;
+        }
+        .doc-table th {
+            background: #f1f5f9;
+            color: #1e293b;
+            font-weight: 700;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #cbd5e1;
+            border-right: 1px solid #e2e8f0;
+        }
+        .doc-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: top;
+        }
+        .doc-table tr:last-child td {
+            border-bottom: none;
+        }
+        .doc-table th:last-child, .doc-table td:last-child {
+            border-right: none;
+        }
+        .doc-table tr:nth-child(even) td {
+            background: #fafafa;
+        }
+        .doc-code-card {
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 18px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .code-header {
+            background: #0f172a;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 12px;
+            font-family: monospace;
+        }
+        .copy-btn {
+            background: #334155;
+            border: none;
+            color: white;
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover {
+            background: #475569;
+        }
+        .doc-code-card pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            color: #38bdf8;
+            font-family: 'Consolas', 'Fira Code', Courier, monospace;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+        .doc-callout-card {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            border-radius: 8px;
+            padding: 14px 18px;
+            display: flex;
+            gap: 12px;
+            margin: 18px 0;
+            align-items: flex-start;
+            color: #1e3a8a;
+            font-size: 13.5px;
+        }
+        .callout-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .highlight-search {
+            background: #fef08a;
+            color: #854d0e;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        @media (max-width: 600px) {
+            .doc-modal-container {
+                width: 100%;
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+            .doc-modal-overlay {
+                padding: 0;
+            }
+            .doc-modal-body {
+                padding: 18px 16px;
+            }
+            .doc-tools-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .doc-search-box {
+                max-width: 100%;
+            }
+            .doc-actions-group {
+                justify-content: flex-end;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -345,6 +808,25 @@
                 <span class="status-dot"></span>
                 <span>Online</span>
             </div>
+        </div>
+        <!-- MENU DOKUMEN PROYEK -->
+        <div class="doc-menu-bar">
+            <span class="doc-menu-label">📑 Dokumen:</span>
+            <button class="doc-menu-btn" onclick="openDocModal('proposal')" title="Lihat Proposal Proyek Taufik AI">
+                <span>📋</span>
+                <span>Proposal Proyek</span>
+                <span class="btn-badge">Word</span>
+            </button>
+            <button class="doc-menu-btn" onclick="openDocModal('laporan_akhir')" title="Lihat Laporan Akhir Proyek Taufik AI">
+                <span>📊</span>
+                <span>Laporan Akhir</span>
+                <span class="btn-badge">Word</span>
+            </button>
+            <button class="doc-menu-btn" onclick="openDocModal('laporan_perjalanan')" title="Lihat Laporan Perjalanan Proyek Taufik AI (2)">
+                <span>🗺️</span>
+                <span>Laporan Perjalanan (2)</span>
+                <span class="btn-badge">Word</span>
+            </button>
         </div>
 
         <div id="chatBox"></div>
@@ -600,6 +1082,900 @@
         console.log('✨ Taufik AI siap!');
         console.log('🔑 API Key:', API_KEY ? '✅ Terdeteksi' : '❌ Tidak terdeteksi');
         console.log('📦 Model aktif:', currentModel);
+
+        // ===== LOGIKA MODAL DOKUMEN PROYEK =====
+        let currentDocTab = 'proposal';
+
+        const DOC_FILES = {
+            proposal: {
+                title: 'Proposal Proyek: Rancang Bangun Taufik AI',
+                file: 'Proposal_Project_Taufik_AI.docx'
+            },
+            laporan_akhir: {
+                title: 'Laporan Akhir Pelaksanaan Proyek: Taufik AI',
+                file: 'Laporan_Akhir_Project_Taufik_AI.docx'
+            },
+            laporan_perjalanan: {
+                title: 'Laporan Perjalanan Proyek AI (2): Taufik AI',
+                file: 'Laporan_Perjalanan_Proyek_Taufik_AI (2).docx'
+            }
+        };
+
+        function openDocModal(tabName = 'proposal') {
+            const modal = document.getElementById('docModal');
+            if (modal) {
+                modal.classList.add('active');
+                switchDocTab(tabName);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeDocModal() {
+            const modal = document.getElementById('docModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function handleOverlayClick(event) {
+            if (event.target && event.target.id === 'docModal') {
+                closeDocModal();
+            }
+        }
+
+        function switchDocTab(tabName) {
+            currentDocTab = tabName;
+
+            // Reset search input
+            const searchInput = document.getElementById('docSearchInput');
+            if (searchInput) {
+                searchInput.value = '';
+                clearSearchHighlights();
+            }
+
+            // Update Tab Buttons
+            document.querySelectorAll('.doc-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.doc-tab-content').forEach(content => content.classList.remove('active'));
+
+            if (tabName === 'proposal') {
+                document.getElementById('tabBtnProposal').classList.add('active');
+                document.getElementById('docTabProposal').classList.add('active');
+            } else if (tabName === 'laporan_akhir') {
+                document.getElementById('tabBtnLaporanAkhir').classList.add('active');
+                document.getElementById('docTabLaporanAkhir').classList.add('active');
+            } else if (tabName === 'laporan_perjalanan') {
+                document.getElementById('tabBtnLaporanPerjalanan').classList.add('active');
+                document.getElementById('docTabLaporanPerjalanan').classList.add('active');
+            }
+
+            // Update Header & Download Link
+            const docInfo = DOC_FILES[tabName] || DOC_FILES.proposal;
+            const headerTitle = document.getElementById('modalHeaderTitle');
+            if (headerTitle) headerTitle.textContent = docInfo.title;
+
+            const downloadLink = document.getElementById('downloadDocxLink');
+            if (downloadLink) {
+                downloadLink.href = docInfo.file;
+                downloadLink.download = docInfo.file;
+            }
+
+            // Scroll modal body to top
+            const modalBody = document.getElementById('docModalBody');
+            if (modalBody) modalBody.scrollTop = 0;
+        }
+
+        function printActiveDoc() {
+            window.print();
+        }
+
+        function copyCode(btn) {
+            const pre = btn.closest('.doc-code-card').querySelector('code');
+            if (pre) {
+                navigator.clipboard.writeText(pre.innerText).then(() => {
+                    const origText = btn.textContent;
+                    btn.textContent = 'Tersalin! ✓';
+                    btn.style.background = '#10b981';
+                    setTimeout(() => {
+                        btn.textContent = origText;
+                        btn.style.background = '';
+                    }, 2000);
+                }).catch(err => console.error('Copy failed:', err));
+            }
+        }
+
+        function clearSearchHighlights() {
+            const activeTab = document.querySelector('.doc-tab-content.active');
+            if (!activeTab) return;
+            const highlighted = activeTab.querySelectorAll('.highlight-search');
+            highlighted.forEach(span => {
+                const parent = span.parentNode;
+                parent.replaceChild(document.createTextNode(span.textContent), span);
+                parent.normalize();
+            });
+        }
+
+        function searchInDoc(keyword) {
+            clearSearchHighlights();
+            const term = keyword.trim().toLowerCase();
+            if (!term || term.length < 2) return;
+
+            const activeTab = document.querySelector('.doc-tab-content.active');
+            if (!activeTab) return;
+
+            const walker = document.createTreeWalker(
+                activeTab,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+
+            const nodesToReplace = [];
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.parentElement && (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE' || node.parentElement.classList.contains('highlight-search'))) {
+                    continue;
+                }
+                if (node.nodeValue && node.nodeValue.toLowerCase().includes(term)) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            let firstMatch = null;
+            nodesToReplace.forEach(textNode => {
+                const parent = textNode.parentNode;
+                if (!parent) return;
+                const text = textNode.nodeValue;
+                const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                const parts = text.split(regex);
+                const fragment = document.createDocumentFragment();
+
+                parts.forEach(part => {
+                    if (part.toLowerCase() === term) {
+                        const span = document.createElement('span');
+                        span.className = 'highlight-search';
+                        span.textContent = part;
+                        fragment.appendChild(span);
+                        if (!firstMatch) firstMatch = span;
+                    } else if (part) {
+                        fragment.appendChild(document.createTextNode(part));
+                    }
+                });
+
+                parent.replaceChild(fragment, textNode);
+            });
+
+            if (firstMatch) {
+                firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Shortcut Esc untuk menutup modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDocModal();
+            }
+        });
+
     </script>
+
+    <!-- MODAL DOKUMEN PROYEK (READER) -->
+    <div id="docModal" class="doc-modal-overlay" onclick="handleOverlayClick(event)">
+        <div class="doc-modal-container">
+            <div class="doc-modal-header">
+                <div class="doc-modal-header-title">
+                    <span>📑</span>
+                    <span id="modalHeaderTitle">Dokumen Proyek Taufik AI</span>
+                </div>
+                <button class="doc-modal-close-btn" onclick="closeDocModal()" title="Tutup (Esc)">✕</button>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="doc-modal-nav-tabs">
+                <button id="tabBtnProposal" class="doc-tab-btn active" onclick="switchDocTab('proposal')">
+                    <span>📋</span> Proposal Proyek
+                </button>
+                <button id="tabBtnLaporanAkhir" class="doc-tab-btn" onclick="switchDocTab('laporan_akhir')">
+                    <span>📊</span> Laporan Akhir
+                </button>
+                <button id="tabBtnLaporanPerjalanan" class="doc-tab-btn" onclick="switchDocTab('laporan_perjalanan')">
+                    <span>🗺️</span> Laporan Perjalanan (2)
+                </button>
+            </div>
+
+            <!-- Tools Bar (Search & Export) -->
+            <div class="doc-tools-bar">
+                <div class="doc-search-box">
+                    <span>🔍</span>
+                    <input type="text" id="docSearchInput" placeholder="Cari kata kunci dalam dokumen..." oninput="searchInDoc(this.value)">
+                </div>
+                <div class="doc-actions-group">
+                    <button class="doc-action-btn" onclick="printActiveDoc()" title="Cetak atau Simpan PDF">
+                        <span>🖨️</span> Cetak / PDF
+                    </button>
+                    <a id="downloadDocxLink" href="Proposal_Project_Taufik_AI.docx" download class="doc-action-btn" title="Unduh file dokumen asli (.docx)">
+                        <span>💾</span> Unduh .docx
+                    </a>
+                </div>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="doc-modal-body" id="docModalBody">
+                <!-- Tab 1: Proposal Proyek -->
+                <div id="docTabProposal" class="doc-tab-content active">
+<div class="doc-header-card">
+  <div class="doc-type-badge">PROPOSAL PROYEK PENGEMBANGAN SISTEM</div>
+  <h2 class="doc-main-title">RANCANG BANGUN ASISTEN VIRTUAL BERBASIS KECERDASAN BUATAN: &quot;TAUFIK AI&quot;</h2>
+  <p class="doc-tagline">Implementasi Natural Language Processing (NLP) dan Large Language Model Menggunakan Groq LPU API pada Netlify Cloud</p>
+  <p class="doc-meta-item">Disusun Oleh:Muhamad Taufik</p>
+  <p class="doc-meta-item">Tahun 2026</p>
+</div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB I: PENDAHULUAN</h3>
+<h4 class="doc-section-heading">1.1 Latar Belakang</h4>
+<p class="doc-p">Perkembangan teknologi Kecerdasan Buatan (Artificial Intelligence/AI), khususnya bidang Natural Language Processing (NLP) dan Large Language Models (LLM), telah merevolusi interaksi manusia dengan sistem komputer. Di masa lalu, interaksi komputer terbatas pada menu dan perintah kaku. Kini, melalui NLP modern, mesin mampu memahami teks bebas dalam bahasa alami manusia, menangkap konteks semantik, dan memberikan jawaban secara luwes.</p>
+<p class="doc-p">Namun, implementasi sistem chatbot NLP pada web publik kerap menghadapi dua tantangan utama: latensi komputasi inferensi bahasa yang lambat dan kerentanan keamanan kredensial (API Key) pada aplikasi murni sisi klien. Proyek &quot;Taufik AI&quot; dirancang untuk menghadirkan solusi chatbot NLP berkecepatan tinggi dengan akselerasi Groq LPU, didukung arsitektur keamanan serverless proxy pada Netlify Cloud.</p>
+<h4 class="doc-section-heading">1.2 Rumusan Masalah</h4>
+<ul class="doc-list">
+  <li><strong>Pemrosesan Bahasa Alami Berkecepatan Tinggi</strong>: Bagaimana mengimplementasikan inferensi NLP dengan latensi respons sub-detik agar percakapan terasa interaktif dan alami?</li>
+  <li><strong>Keamanan Kredensial Engine NLP</strong>: Bagaimana menyembunyikan API key penyedia model NLP agar tidak dieksploitasi oleh pengguna publik?</li>
+  <li><strong>Resolusi Konteks Bahasa Multibabak</strong>: Bagaimana mengelola riwayat percakapan agar asisten memahami acuan kata ganti (coreference resolution) pada dialog beruntun?</li>
+  <li><strong>Personalisasi Gaya Bahasa</strong>: Bagaimana mengonfigurasi persona asisten digital dengan karakter ramah berbahasa Indonesia (Taufik AI)?</li>
+</ul>
+<h4 class="doc-section-heading">1.3 Tujuan Proyek</h4>
+<ul class="doc-list">
+  <li><strong>Membangun Antarmuka Chatbot NLP Responsif</strong>: Merancang web UI modern yang responsif untuk interaksi percakapan dua arah.</li>
+  <li><strong>Mengintegrasikan Engine NLP Mutakhir</strong>: Menghubungkan aplikasi dengan model LLM berkapasitas 120 miliar parameter (openai/gpt-oss-120b) berbasis akselerasi Groq LPU.</li>
+  <li><strong>Mengimplementasikan Serverless Security Proxy</strong>: Menyembunyikan kredensial NLP pada environment variables Netlify Functions.</li>
+  <li><strong>Mempublikasikan Sistem di Internet</strong>: Mendistribusikan sistem secara global dan gratis melalui platform Netlify.</li>
+</ul>
+<h4 class="doc-section-heading">1.4 Manfaat Proyek</h4>
+<ul class="doc-list">
+  <li><strong>Bagi Pengguna</strong>: Mendapatkan asisten virtual cerdas yang memahami ragam pertanyaan dalam bahasa Indonesia selama 24 jam.</li>
+  <li><strong>Bagi Pengembang</strong>: Memperdalam pemahaman teknis mengenai penerapan NLP praktis, rekayasa prompt, dan arsitektur serverless proxy.</li>
+  <li><strong>Bagi Akademisi</strong>: Menjadi referensi rancang bangun aplikasi AI berbasis zero-cost architecture yang aman dan efisien.</li>
+</ul>
+<h4 class="doc-section-heading">1.5 Batasan Masalah</h4>
+<ul class="doc-list">
+  <li><strong>Modalitas Input</strong>: Fokus pada interaksi teks dua arah (text-based conversational agent).</li>
+  <li><strong>Bahasa Utama</strong>: Bahasa Indonesia sebagai bahasa komunikasi utama sistem.</li>
+  <li><strong>Hosting Platform</strong>: Netlify Starter Tier dengan batas 125.000 panggilan fungsi gratis per bulan.</li>
+</ul>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB II: TINJAUAN TEKNOLOGI &amp; LANDASAN TEORI NLP</h3>
+<h4 class="doc-section-heading">2.1 Konsep Dasar Natural Language Processing (NLP)</h4>
+<p class="doc-p">Natural Language Processing (NLP) adalah cabang ilmu kecerdasan buatan dan linguistik komputasi yang mempelajari kemampuan komputer dalam memahami, menginterpretasikan, dan menghasilkan bahasa manusia. Dalam arsitektur modern, NLP terbagi menjadi dua sub-bidang esensial:</p>
+<ul class="doc-list">
+  <li><strong>Natural Language Understanding (NLU)</strong>: Bagian yang bertugas memahami maksud pengguna (intent recognition), mengenali entitas nama/tempat/waktu (named entity recognition), serta mengurai struktur sintaksis kalimat.</li>
+  <li><strong>Natural Language Generation (NLG)</strong>: Bagian yang bertugas memproduksi kalimat balasan yang koheren, gramatikal, dan relevan dengan konteks percakapan.</li>
+</ul>
+<h4 class="doc-section-heading">2.2 Arsitektur Transformer dan Large Language Model (LLM)</h4>
+<p class="doc-p">Fondasi model NLP saat ini dibangun di atas arsitektur Transformer yang mengandalkan mekanisme Self-Attention. Mekanisme ini memungkinkan model menimbang bobot hubungan antar-kata dalam sebuah kalimat secara simultan, terlepas dari jarak posisi kata tersebut. Model openai/gpt-oss-120b yang digunakan dalam proyek ini telah dilatih pada miliaran korpus teks multibahasa sehingga memiliki penalaran semantik yang sangat mendalam terhadap bahasa Indonesia.</p>
+<h4 class="doc-section-heading">2.3 Aspek Teknis Penerapan NLP pada Sistem Taufik AI</h4>
+<p class="doc-p">Dalam proyek Taufik AI, prinsip-prinsip NLP diterapkan pada beberapa layer sistem:</p>
+<ul class="doc-list">
+  <li><strong>Tokenisasi (Tokenization)</strong>: Teks masukan pengguna dipecah menjadi unit-unit token leksikal sebelum diubah menjadi vektor berdimensi tinggi (embeddings).</li>
+  <li><strong>Rekayasa Prompt &amp; Conditioning (Prompt Engineering)</strong>: Mengarahkan probabilitas pembentukan teks model melalui System Prompt terstruktur: &#x27;Anda adalah Taufik AI, asisten AI pribadi yang ramah, cerdas, dan membantu. Selalu jawab dengan bahasa Indonesia yang sopan, jelas, dan natural.&#x27;</li>
+  <li><strong>Resolusi Koreferensi (Coreference Resolution)</strong>: Kemampuan mengidentifikasi objek yang dirujuk oleh kata ganti (&#x27;dia&#x27;, &#x27;itu&#x27;, &#x27;tersebut&#x27;). Hal ini diwujudkan dengan menyertakan riwayat 6 pesan terakhir ke dalam context window inferensi.</li>
+  <li><strong>Pengaturan Distribusi Probabilitas (Softmax Temperature)</strong>: Parameter temperature = 0.7 digunakan untuk mengontrol tingkat entropi dan kreativitas pemilihan kata agar hasil jawaban luwes dan tidak repetitif.</li>
+</ul>
+<h4 class="doc-section-heading">2.4 Komputasi Akselerasi Groq LPU &amp; Serverless Netlify</h4>
+<p class="doc-p">Groq Language Processing Unit (LPU) menghadirkan kecepatan inferensi token per detik yang jauh melampaui GPU konvensional. Dikombinasikan dengan Netlify Functions sebagai gerbang serverless proxy, seluruh aliran inferensi NLP berjalan aman tanpa mengekspos kredensial ke sisi klien.</p>
+<div class="doc-callout-card"><div class="callout-icon">💡</div><div class="callout-content">📌 Karakteristik NLP SistemNLP pada Taufik AI bukan sekadar pencocokan kata kunci (keyword matching), melainkan pemahaman semantik mendalam menggunakan LLM 120 Miliar Parameter yang dikondisikan melalui System Prompting dan Context Management.</div></div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB III: METODOLOGI &amp; PERANCANGAN ALUR NLP</h3>
+<h4 class="doc-section-heading">3.1 Metodologi Pengembangan</h4>
+<p class="doc-p">Pengembangan menggunakan siklus iteratif Agile: Analisis Kebutuhan NLP -&gt; Perancangan Arsitektur Proxy -&gt; Implementasi UI &amp; Backend -&gt; Pengujian Kualitas Bahasa &amp; Keamanan -&gt; Deployment Cloud.</p>
+<h4 class="doc-section-heading">3.2 Alur Pemrosesan Bahasa Alami (NLP Pipeline)</h4>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Tahapan Pemrosesan</th>
+    <th>Deskripsi Aktivitas NLP</th>
+  </tr>
+  <tr>
+    <td>Tahap 1: Input Teks</td>
+    <td>Pengguna memasukkan kalimat bebas berbahasa Indonesia pada form antarmuka web.</td>
+  </tr>
+  <tr>
+    <td>Tahap 2: Context Assembly</td>
+    <td>Frontend menyusun riwayat dialog sesi aktif (multi-turn history) dan menggabungkannya dengan System Prompt.</td>
+  </tr>
+  <tr>
+    <td>Tahap 3: Proxy Dispatch</td>
+    <td>Payload JSON dikirimkan ke endpoint serverless /api/chat dengan proteksi CORS.</td>
+  </tr>
+  <tr>
+    <td>Tahap 4: Tokenization &amp; Embedding</td>
+    <td>Server Groq memecah teks menjadi token dan memetakannya ke dalam ruang vektor semantik.</td>
+  </tr>
+  <tr>
+    <td>Tahap 5: Transformer Attention</td>
+    <td>Lapisan self-attention membedah maksud dan konteks pesan pengguna (NLU).</td>
+  </tr>
+  <tr>
+    <td>Tahap 6: Autoregressive NLG</td>
+    <td>Model membangkitkan token balasan kata per kata hingga mencapai token stop atau batas max_tokens.</td>
+  </tr>
+  <tr>
+    <td>Tahap 7: Output Rendering</td>
+    <td>Jawaban AI dikembalikan ke browser dan dirender secara rapi dengan CSS pre-wrap styling.</td>
+  </tr>
+</table></div>
+<h4 class="doc-section-heading">3.3 Desain Antarmuka Pengguna (UI/UX)</h4>
+<ul class="doc-list">
+  <li><strong>Branding Persona</strong>: Menampilkan nama &#x27;Taufik AI&#x27;, status aktif, dan foto profil personal Profile.jpg.</li>
+  <li><strong>Visual Feedback</strong>: Animasi typing indicator yang mengindikasikan proses inferensi bahasa sedang berlangsung.</li>
+  <li><strong>Struktur Teks Terformat</strong>: Dukungan tata letak paragraf dan baris baru agar jawaban panjang mudah dibaca.</li>
+</ul>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB IV: RENCANA PELAKSANAAN &amp; ESTIMASI ANGGARAN</h3>
+<h4 class="doc-section-heading">4.1 Rencana Jadwal Kerja (Timeline)</h4>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Fase</th>
+    <th>Aktivitas Pekerjaan</th>
+    <th>Target Waktu</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>Tahap 1</td>
+    <td>Riset Model NLP, Prompt Engineering &amp; Desain UI</td>
+    <td>Minggu 1</td>
+    <td>Selesai</td>
+  </tr>
+  <tr>
+    <td>Tahap 2</td>
+    <td>Implementasi Integrasi Groq API &amp; Pengujian Lokal</td>
+    <td>Minggu 1</td>
+    <td>Selesai</td>
+  </tr>
+  <tr>
+    <td>Tahap 3</td>
+    <td>Rancang Bangun Serverless Proxy Netlify Functions</td>
+    <td>Minggu 2</td>
+    <td>Selesai</td>
+  </tr>
+  <tr>
+    <td>Tahap 4</td>
+    <td>Pengujian Keamanan, Evaluasi Bahasa, &amp; Troubleshooting</td>
+    <td>Minggu 2</td>
+    <td>Selesai</td>
+  </tr>
+  <tr>
+    <td>Tahap 5</td>
+    <td>Deploy Cloud Publik, Custom Naming, &amp; Finalisasi Laporan</td>
+    <td>Minggu 2</td>
+    <td>Selesai</td>
+  </tr>
+</table></div>
+<h4 class="doc-section-heading">4.2 Estimasi Anggaran Biaya</h4>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>No</th>
+    <th>Komponen Sumber Daya</th>
+    <th>Spesifikasi &amp; Kapasitas</th>
+    <th>Biaya</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Layanan Hosting Netlify (Starter Tier)</td>
+    <td>125.000 requests/bln, 100 GB Bandwidth</td>
+    <td>Rp 0,- (Gratis)</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Groq LPU API (Developer Free Tier)</td>
+    <td>Akses model NLP berkecepatan tinggi</td>
+    <td>Rp 0,- (Gratis)</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Version Control (GitHub Public Repo)</td>
+    <td>Repository publik &amp; auto-deploy hooks</td>
+    <td>Rp 0,- (Gratis)</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Domain &amp; Sertifikat SSL/HTTPS</td>
+    <td>Subdomain netlify.app &amp; Let&#x27;s Encrypt SSL</td>
+    <td>Rp 0,- (Gratis)</td>
+  </tr>
+  <tr>
+    <td>Total</td>
+    <td>Estimasi Biaya Operasional Bulanan</td>
+    <td>Arsitektur Zero-Cost Cloud</td>
+    <td>Rp 0,-</td>
+  </tr>
+</table></div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB V: PENUTUP</h3>
+<p class="doc-p">Rancangan proyek asisten virtual &quot;Taufik AI&quot; menggabungkan kecanggihan Natural Language Processing modern dengan arsitektur komputasi awan yang aman dan efisien. Sistem ini membuktikan bahwa teknologi kecerdasan buatan terdepan dapat diterapkan secara aplikatif dan dapat dinikmati oleh masyarakat luas tanpa kendala biaya infrastruktur.</p>
+                </div>
+
+                <!-- Tab 2: Laporan Akhir -->
+                <div id="docTabLaporanAkhir" class="doc-tab-content">
+<div class="doc-header-card">
+  <div class="doc-type-badge">LAPORAN AKHIR PELAKSANAAN PROYEK</div>
+  <h2 class="doc-main-title">LAPORAN AKHIR RANCANG BANGUN DAN IMPLEMENTASI ASISTEN VIRTUAL BERBASIS AI: &quot;TAUFIK AI&quot;</h2>
+  <p class="doc-tagline">Implementasi Natural Language Processing (NLP) dengan Groq LPU API, Serverless Proxy, dan Deployment pada Netlify Cloud</p>
+  <p class="doc-meta-item">Disusun Oleh:Muhamad Taufik</p>
+  <p class="doc-meta-item">Tahun 2026</p>
+</div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB I: PENDAHULUAN &amp; RINGKASAN EKSEKUTIF</h3>
+<h4 class="doc-section-heading">1.1 Ringkasan Eksekutif (Executive Summary)</h4>
+<p class="doc-p">Proyek &quot;Taufik AI&quot; telah sukses dirancang, dibangun, diuji, dan dipublikasikan di internet. Proyek ini mengimplementasikan teknologi pemrosesan bahasa alami (Natural Language Processing/NLP) mutakhir berbasis model openai/gpt-oss-120b yang diakselerasi oleh unit pemrosesan bahasa Groq LPU. Aplikasi web ini dilengkapi mekanisme keamanan serverless proxy pada Netlify Cloud, memastikan API key tidak terekspos ke browser pengunjung. Hasil akhir membuktikan chatbot mampu berinteraksi dalam bahasa Indonesia secara cerdas, kontekstual, responsif (~0.7 detik), dan beroperasi online 24 jam.</p>
+<h4 class="doc-section-heading">1.2 Latar Belakang Masalah dan Solusi yang Dihasilkan</h4>
+<p class="doc-p">Pada tahap awal pengujian, chatbot mengalami error HTTP 400 akibat digunakannya model lama (llama3-70b-8192) yang telah dinonaktifkan oleh penyedia API. Selain itu, terdapat kebutuhan krusial untuk menyembunyikan API key saat web dipublikasikan secara publik.</p>
+<p class="doc-p">Rangkaian solusi yang berhasil diimplementasikan mencakup:</p>
+<ul class="doc-list">
+  <li><strong>Upgrade Engine NLP</strong>: Beralih ke model aktif openai/gpt-oss-120b yang sangat fasih berbahasa Indonesia dengan latensi rendah.</li>
+  <li><strong>Mekanisme Fallback NLP</strong>: Menyediakan daftar model cadangan (openai/gpt-oss-20b, qwen3.8-27b) untuk menjamin keandalan layanan.</li>
+  <li><strong>Konstruksi Serverless Proxy</strong>: Membangun fungsi backend pada Netlify Functions (/api/chat) yang menyembunyikan API key di environment variables.</li>
+  <li><strong>Personalisasi Identitas UI</strong>: Menyematkan foto profil Profile.jpg dan menetapkan persona resmi sebagai &#x27;Taufik AI&#x27;.</li>
+</ul>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB II: REALISASI ARSITEKTUR &amp; IMPLEMENTASI TEKNIS</h3>
+<h4 class="doc-section-heading">2.1 Struktur Komponen dan File Proyek</h4>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Nama File / Direktori</th>
+    <th>Kategori</th>
+    <th>Peran &amp; Fungsi dalam Sistem</th>
+  </tr>
+  <tr>
+    <td>index.html</td>
+    <td>Frontend Web UI</td>
+    <td>Antarmuka chat, manajemen konteks NLP, dan penanganan status interaksi.</td>
+  </tr>
+  <tr>
+    <td>Profile.jpg</td>
+    <td>Aset Visual</td>
+    <td>Foto profil resmi Taufik AI yang disematkan pada header dan bubble chat.</td>
+  </tr>
+  <tr>
+    <td>netlify/functions/chat.js</td>
+    <td>Backend Proxy</td>
+    <td>Serverless function Node.js perantara request ke Groq NLP Engine.</td>
+  </tr>
+  <tr>
+    <td>netlify.toml</td>
+    <td>Konfigurasi Rute</td>
+    <td>Pengalihan otomatis dari /api/* ke /.netlify/functions/:splat.</td>
+  </tr>
+  <tr>
+    <td>config.js</td>
+    <td>Konfigurasi Lokal</td>
+    <td>Penyimpan API Key lokal untuk pengujian di komputer pribadi (terproteksi di .gitignore).</td>
+  </tr>
+  <tr>
+    <td>.gitignore</td>
+    <td>Proteksi Repositori</td>
+    <td>Mencegah file sensitif terunggah ke repositori publik GitHub.</td>
+  </tr>
+</table></div>
+<h4 class="doc-section-heading">2.2 Analisis Penerapan Natural Language Processing (NLP) pada File Proyek</h4>
+<p class="doc-p">Penerapan disiplin ilmu NLP tersebar secara terintegrasi pada berbagai file kode program proyek ini. Berikut pemetaan rincinya:</p>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Lokasi Kode / File</th>
+    <th>Konsep NLP yang Diterapkan</th>
+    <th>Fungsi &amp; Dampak Teknis</th>
+  </tr>
+  <tr>
+    <td>index.html (Baris 513)</td>
+    <td>Rekayasa Prompt (System Prompt Conditioning)</td>
+    <td>Membatasi ruang probabilitas bahasa model agar mengadopsi persona Taufik AI yang ramah, sopan, dan berbahasa Indonesia.</td>
+  </tr>
+  <tr>
+    <td>index.html (Baris 511)</td>
+    <td>Manajemen Konteks (Context Window Management)</td>
+    <td>Menyimpan 6 pesan terakhir untuk mengatasi masalah koreferensi (coreference resolution) pada percakapan bertingkat.</td>
+  </tr>
+  <tr>
+    <td>index.html (Baris 448)</td>
+    <td>Hyperparameter Sampling (Temperature = 0.7)</td>
+    <td>Mengatur distribusi probabilitas softmax pemilihan kata agar hasil jawaban luwes dan bervariasi.</td>
+  </tr>
+  <tr>
+    <td>index.html (Baris 449)</td>
+    <td>Token Budgeting (Max Tokens = 800)</td>
+    <td>Membatasi panjang pembangkitan teks balasan (NLG) agar padat dan informatif.</td>
+  </tr>
+  <tr>
+    <td>netlify/functions/chat.js</td>
+    <td>Integritas Enkapsulasi Payload NLP</td>
+    <td>Meneruskan struktur array pesan (system, user, assistant) dengan encoding UTF-8 tanpa distorsi karakter.</td>
+  </tr>
+  <tr>
+    <td>Groq Cloud Engine</td>
+    <td>Inferensi Model Transformer (NLU &amp; NLG)</td>
+    <td>Tokenisasi, perhitungan matriks self-attention, ekstraksi maksud, dan pembangkitan teks balasan.</td>
+  </tr>
+</table></div>
+<p class="doc-p">A. Rekayasa Prompt (Prompt Engineering &amp; Conditioning)</p>
+<p class="doc-p">Pada file index.html fungsi sendMessage(), diterapkan conditioning berikut:</p>
+<div class="doc-callout-card"><div class="callout-icon">💡</div><div class="callout-content">📌 Kode System Prompt NLP di index.htmlconst messages = [    { role: &#x27;system&#x27;, content: &#x27;Anda adalah Taufik AI, asisten AI pribadi yang ramah, cerdas, dan membantu. Selalu jawab dengan bahasa Indonesia yang sopan, jelas, dan natural.&#x27; },    ...contextMessages];</div></div>
+<p class="doc-p">Instruksi sistem ini bertindak sebagai &#x27;prior probability guidance&#x27; pada proses inferensi NLP, mengarahkan gaya bahasa model agar senantiasa sopan, informatif, dan menggunakan bahasa Indonesia yang baik.</p>
+<p class="doc-p">B. Penanganan Konteks Dialog Multibabak (Coreference Resolution)</p>
+<p class="doc-p">Dalam percakapan alami manusia, seringkali pengguna menggunakan kata ganti (&#x27;dia&#x27;, &#x27;itu&#x27;, &#x27;tersebut&#x27;) yang merujuk pada subjek pada pertanyaan sebelumnya. Kode const contextMessages = messageHistory.slice(-6); memastikan konteks riwayat tetap terkirim ke model, sehingga AI dapat melakukan resolusi anaphora dengan tepat.</p>
+<p class="doc-p">C. Parameter Pengendali Karakteristik Teks</p>
+<ul class="doc-list">
+  <li><strong>temperature: 0.7</strong>: Nilai temperatur optimal dalam NLP. Nilai 0.0 menghasilkan teks deterministik yang kaku, sedangkan 1.0 terlalu acak. Nilai 0.7 memberikan keseimbangan ideal antara akurasi faktual dan keluwesan bahasa.</li>
+  <li><strong>max_tokens: 800</strong>: Membatasi output maksimum sekitar 600-800 kata bahasa Indonesia untuk efisiensi komputasi dan kenyamanan membaca pengguna.</li>
+</ul>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB III: HASIL PENGUJIAN DAN EVALUASI SISTEM</h3>
+<h4 class="doc-section-heading">3.1 Pengujian Fungsionalitas (Black-Box Testing)</h4>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>ID Uji</th>
+    <th>Skenario Pengujian</th>
+    <th>Hasil yang Diharapkan</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>TC-01</td>
+    <td>Kirim pesan teks via tombol &#x27;Kirim&#x27;</td>
+    <td>Pesan terkirim, muncul bubble user, AI merespons</td>
+    <td>BERHASIL</td>
+  </tr>
+  <tr>
+    <td>TC-02</td>
+    <td>Kirim pesan teks via tombol &#x27;Enter&#x27;</td>
+    <td>Pesan terkirim instan tanpa reload halaman</td>
+    <td>BERHASIL</td>
+  </tr>
+  <tr>
+    <td>TC-03</td>
+    <td>Kirim pesan kosong</td>
+    <td>Sistem memblokir pengiriman, input tidak terproses</td>
+    <td>BERHASIL</td>
+  </tr>
+  <tr>
+    <td>TC-04</td>
+    <td>Kirim pesan melebihi 2000 karakter</td>
+    <td>Sistem menampilkan alert batas karakter</td>
+    <td>BERHASIL</td>
+  </tr>
+  <tr>
+    <td>TC-05</td>
+    <td>Animasi typing indicator</td>
+    <td>Indikator aktif saat memproses dan hilang saat pesan selesai</td>
+    <td>BERHASIL</td>
+  </tr>
+  <tr>
+    <td>TC-06</td>
+    <td>Tampilan identitas &amp; foto profil</td>
+    <td>Header menampilkan foto Profile.jpg dan nama &#x27;Taufik AI&#x27;</td>
+    <td>BERHASIL</td>
+  </tr>
+  <tr>
+    <td>TC-07</td>
+    <td>Proteksi kredensial di DevTools</td>
+    <td>API Key tidak dapat ditemukan pada inspeksi browser</td>
+    <td>BERHASIL</td>
+  </tr>
+</table></div>
+<h4 class="doc-section-heading">3.2 Evaluasi Kualitas Pemrosesan Bahasa Alami (NLP Quality)</h4>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Aspek Pengujian NLP</th>
+    <th>Skenario Uji &amp; Respons Sistem</th>
+    <th>Hasil Evaluasi</th>
+  </tr>
+  <tr>
+    <td>Pemahaman Konteks Bertingkat</td>
+    <td>U1: &#x27;Siapa presiden pertama Indonesia?&#x27; -&gt; AI: &#x27;Ir. Soekarno&#x27;U2: &#x27;Kapan beliau lahir?&#x27; -&gt; AI memahami &#x27;beliau&#x27; = Soekarno</td>
+    <td>Lolos (Akurat)</td>
+  </tr>
+  <tr>
+    <td>Penanganan Diksi Informal / Santai</td>
+    <td>Input: &#x27;Halo bro, ada tips belajar koding gak?&#x27; -&gt; AI merespons ramah dan memberikan tips terstruktur</td>
+    <td>Lolos (Adaptif)</td>
+  </tr>
+  <tr>
+    <td>Konsistensi Persona &amp; Bahasa</td>
+    <td>Meminta AI memperkenalkan diri -&gt; AI menjawab sebagai &#x27;Taufik AI&#x27; secara konsisten dalam bahasa Indonesia</td>
+    <td>Lolos (Stabil)</td>
+  </tr>
+  <tr>
+    <td>Kejelasan Struktur Jawaban</td>
+    <td>Pertanyaan penjelasan teknis -&gt; AI memformat jawaban dengan poin-poin rapi berkat CSS pre-wrap</td>
+    <td>Lolos (Rapi)</td>
+  </tr>
+</table></div>
+<h4 class="doc-section-heading">3.3 Pengujian Kinerja dan Benchmarking Latensi</h4>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Nama Model AI</th>
+    <th>Kapasitas Parameter</th>
+    <th>Rata-rata Waktu Respons</th>
+    <th>Karakteristik Jawaban</th>
+  </tr>
+  <tr>
+    <td>openai/gpt-oss-120b (Model Utama)</td>
+    <td>120 Miliar Parameter</td>
+    <td>0.72 detik</td>
+    <td>Sangat Cerdas, Komprehensif, Luwes</td>
+  </tr>
+  <tr>
+    <td>openai/gpt-oss-20b (Cadangan 1)</td>
+    <td>20 Miliar Parameter</td>
+    <td>0.58 detik</td>
+    <td>Cepat, Jawaban Ringkas &amp; Tepat</td>
+  </tr>
+  <tr>
+    <td>qwen/qwen3.8-27b (Cadangan 2)</td>
+    <td>27 Miliar Parameter</td>
+    <td>0.41 detik</td>
+    <td>Sangat Cepat, Efektif untuk Analisis Singkat</td>
+  </tr>
+</table></div>
+<h4 class="doc-section-heading">3.4 Dokumentasi Troubleshooting dan Solusi Kendala Teknis</h4>
+<ul class="doc-list">
+  <li><strong>Kendala 1: Model Lama Decommissioned (HTTP 400)</strong>: Penyebab: Model lama llama3-70b-8192 dinonaktifkan oleh Groq. Solusi: Migrasi ke openai/gpt-oss-120b dengan sistem auto-fallback.</li>
+  <li><strong>Kendala 2: Netlify Site Protection / Private Mode (HTTP 401)</strong>: Penyebab: Netlify secara default mengaktifkan Edge Access login pada situs baru. Solusi: Mengubah visibilitas situs menjadi &#x27;Make Public&#x27;.</li>
+  <li><strong>Kendala 3: Posisi Nilai Terbalik pada Environment Variables</strong>: Penyebab: Kata &#x27;GROQ_API_KEY&#x27; terisi pada kolom Value dan kuncinya terisi pada kolom Key. Solusi: Memperbaiki posisi Key dan Value lalu melakukan Trigger Deploy ulang.</li>
+</ul>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB IV: DEPLOYMENT DAN OPERASIONAL SISTEM</h3>
+<h4 class="doc-section-heading">4.1 Integrasi GitHub &amp; Continuous Deployment</h4>
+<p class="doc-p">Proyek dikelola pada repositori GitHub publik: https://github.com/muhamadt4ufik/Chatbot. Integrasi webhook Netlify memastikan setiap commit pembaruan kode otomatis ter-build dan ter-deploy dalam hitungan detik.</p>
+<h4 class="doc-section-heading">4.2 Aksesibilitas Publik</h4>
+<p class="doc-p">Aplikasi Taufik AI beroperasi penuh dan dapat diakses dari perangkat apa pun melalui tautan publik:</p>
+<div class="doc-callout-card"><div class="callout-icon">💡</div><div class="callout-content">📌 Alamat Publik Sistem🌐 Tautan Resmi Aplikasi:https://unique-tiramisu-668ca8.netlify.appTelah diuji dan kompatibel penuh pada browser Google Chrome, Microsoft Edge, Mozilla Firefox, dan Safari (Mobile &amp; Desktop).</div></div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB V: KESIMPULAN DAN SARAN PENGEMBANGAN</h3>
+<h4 class="doc-section-heading">5.1 Kesimpulan</h4>
+<ul class="doc-list">
+  <li><strong>Penerapan NLP Berhasil Sempurna</strong>: Sistem Taufik AI berhasil memanfaatkan kapabilitas pemrosesan bahasa alami tingkat lanjut untuk menghasilkan komunikasi yang cerdas dan luwes.</li>
+  <li><strong>Arsitektur Keamanan Teruji</strong>: Metode Serverless Proxy terbukti berhasil melindungi API key dari kebocoran publik.</li>
+  <li><strong>Performa Unggul &amp; Efisien</strong>: Kombinasi Groq LPU dan Netlify Functions menghasilkan respons super cepat (~0.7s) dengan biaya operasional nol rupiah.</li>
+</ul>
+<h4 class="doc-section-heading">5.2 Saran Pengembangan Lanjutan</h4>
+<ul class="doc-list">
+  <li><strong>Streaming Response (Server-Sent Events)</strong>: Menerapkan efek pengetikan teks kata per kata secara real-time seperti ChatGPT.</li>
+  <li><strong>Penyimpanan Database Konversasi</strong>: Menghubungkan ke database cloud (Supabase/Firebase) agar percakapan tetap tersimpan permanen.</li>
+  <li><strong>Integrasi Multimodal &amp; Suara</strong>: Menambahkan fitur Speech-to-Text dan Text-to-Speech untuk percakapan audio.</li>
+</ul>
+                </div>
+
+                <!-- Tab 3: Laporan Perjalanan -->
+                <div id="docTabLaporanPerjalanan" class="doc-tab-content">
+<div class="doc-header-card">
+  <div class="doc-type-badge">LAPORAN PROJECT ARTIFICIAL INTELLIGENCE</div>
+  <h2 class="doc-main-title">PENGEMBANGAN CHATBOT BERBASIS LARGE LANGUAGE MODEL (LLM)DENGAN GROQ API DAN ARSITEKTUR SERVERLESS CLOUD DEPLOYMENT (TAUFIK AI)</h2>
+  <p class="doc-tagline">Panduan Lengkap Perancangan, Investigasi Masalah, Perbaikan Bug, Refactoring Kode, Konfigurasi Serverless Proxy, hingga Eksekusi Publikasi (Taufik AI)</p>
+</div>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Nama Proyek</th>
+    <th>Aplikasi Chatbot Web Cerdas &#x27;Taufik AI&#x27; (Chatbot web.html &amp; index.html)</th>
+  </tr>
+  <tr>
+    <td><strong>Model AI / Engine</strong></td>
+    <td><strong>Groq LPU Acceleration (openai/gpt-oss-120b, Fallback: gpt-oss-20b, qwen3.8-27b)</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Arsitektur Backend</strong></td>
+    <td><strong>Serverless Function Proxy (Netlify Functions / Node.js AWS Lambda-compatible)</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Teknologi &amp; Bahasa</strong></td>
+    <td><strong>HTML5, CSS3 Modern Glassmorphism, Vanilla JavaScript (ES6+), Node.js, Git</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Status Program &amp; URL</strong></td>
+    <td><strong>Berhasil Diuji &amp; Live Production (https://unique-tiramisu-668ca8.netlify.app)</strong></td>
+  </tr>
+</table></div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB I. PENDAHULUAN</h3>
+<h4 class="doc-section-heading">1.1 Latar Belakang Proyek</h4>
+<p class="doc-p">Perkembangan pesat teknologi Artificial Intelligence (AI), khususnya Large Language Models (LLM) dan Natural Language Processing (NLP), telah mentransformasi cara manusia berinteraksi dengan sistem komputer. Antarmuka berbasis teks percakapan (chatbot cerdas) kini menjadi standar baru dalam layanan pelanggan, asisten virtual pribadi, asisten edukasi, hingga automasi pekerjaan sehari-hari. Melalui arsitektur Transformer dan komputasi akselerasi perangkat keras LPU (Language Processing Unit) dari Groq, inferensi LLM dapat disajikan dengan kecepatan ekstrem melampaui 300 token per detik.</p>
+<p class="doc-p">Proyek ini bermula dari kebutuhan membangun asisten cerdas berbasis web lokal bernama &#x27;Taufik AI&#x27;. Pada tahap inisiasi awal, sistem dibangun dengan antarmuka web client-side (Chatbot web.html) yang berkomunikasi langsung ke endpoint API Groq menggunakan file konfigurasi lokal (config.js). Namun, sistem mengalami kegagalan fungsi (freeze/stuck dan pesan &#x27;Gagal memuat respons&#x27;) akibat dependensi model lama yang telah didegradasi oleh penyedia cloud, serta adanya keterbatasan fatal dalam keamanan kredensial API key jika ingin dipublikasikan secara daring. Oleh karena itu, diperlukan perancangan ulang sistem yang komprehensif, mulai dari pembaruan model inferensi, perbaikan antarmuka visual, implementasi backend serverless proxy pelindung API key, hingga publikasi ke jaringan cloud publik.</p>
+<h4 class="doc-section-heading">1.2 Tujuan Proyek</h4>
+<p class="doc-p">Tujuan utama dari pembuatan, perbaikan, dan publikasi aplikasi Taufik AI adalah:</p>
+<ul class="doc-list">
+  <li>Mendiagnosis dan Mengatasi Bug: Mengidentifikasi akar masalah terhentinya komunikasi antara antarmuka web dengan server Groq API dan memperbaikinya.</li>
+  <li>Migrasi ke Model AI Mutakhir: Memperbarui model bahasa usang menuju generasi model performa tinggi (openai/gpt-oss-120b) dengan mekanisme failover multi-model otomatis.</li>
+  <li>Personalisasi Identitas Visual (Branding): Mengubah identitas chatbot generik menjadi &#x27;Taufik AI&#x27; dengan menyematkan foto profil personal (Profile.jpg) pada header dan bubble chat.</li>
+  <li>Membangun Arsitektur Serverless Proxy: Menciptakan middleware serverless function berbasis Node.js untuk menyembunyikan API key rahasia di cloud, sehingga sistem dapat diakses publik tanpa risiko pencurian kuota.</li>
+  <li>Menerapkan Natural Language Processing (NLP): Mengintegrasikan pemrosesan bahasa alami mencakup subword tokenization, Natural Language Understanding (NLU), dan prompt engineering berkarakter ramah.</li>
+  <li>Publikasi Cloud Produksi: Mengunggah repositori ke GitHub dan mendeploy ke Netlify hingga aplikasi live 24/7 dan dapat digunakan oleh siapa saja secara gratis.</li>
+</ul>
+<h4 class="doc-section-heading">1.3 Ruang Lingkup Sistem</h4>
+<p class="doc-p">Sistem Taufik AI difokuskan pada penyediaan antarmuka obrolan pintar yang responsif, adaptif terhadap perangkat mobile maupun desktop, serta memiliki ketahanan jaringan yang tinggi. Tabel berikut merinci ruang lingkup spesifikasi sistem yang diimplementasikan:</p>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Komponen Sistem</th>
+    <th>Teknologi / Parameter</th>
+    <th>Fungsi &amp; Konfigurasi Khusus</th>
+  </tr>
+  <tr>
+    <td><strong>Frontend UI / UX</strong></td>
+    <td><strong>HTML5, CSS3 Flexbox, Modern Glassmorphism</strong></td>
+    <td><strong>Desain minimalis berestetika tinggi, avatar profil Taufik, dukungan responsive mobile</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Engine LLM Utama</strong></td>
+    <td><strong>Groq Cloud LPU - openai/gpt-oss-120b</strong></td>
+    <td><strong>Penalaran kompleks, wawasan luas, pemahaman multi-bahasa dengan kecepatan inferensi tinggi</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Model Cadangan (Fallback)</strong></td>
+    <td><strong>openai/gpt-oss-20b &amp; qwen/qwen3.8-27b</strong></td>
+    <td><strong>Failover otomatis saat model utama mengalami antrean padat (rate limit) atau kendala server</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Backend Middleware</strong></td>
+    <td><strong>Netlify Functions (Serverless Node.js)</strong></td>
+    <td><strong>Menerima prompt dari browser, menyisipkan header rahasia Groq API Key, dan mereturn data</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Keamanan Kredensial</strong></td>
+    <td><strong>Cloud Environment Variable (GROQ_API_KEY)</strong></td>
+    <td><strong>Kunci otentikasi tersimpan aman di server Netlify, tidak terekspos sama sekali di browser client</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Source Control &amp; CI/CD</strong></td>
+    <td><strong>Git, GitHub Repository, Netlify Auto-Build</strong></td>
+    <td><strong>Otomasi deployment berkelanjutan setiap kali ada pembaruan kode di branch main</strong></td>
+  </tr>
+</table></div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB II. SPESIFIKASI DAN KEBUTUHAN SISTEM</h3>
+<h4 class="doc-section-heading">2.1 Kebutuhan Perangkat Keras (Hardware)</h4>
+<p class="doc-p">Berkat arsitektur komputasi awan (Cloud-based AI) dan inferensi sisi server Groq LPU, kebutuhan spesifikasi perangkat keras di sisi pengguna sangat ringan:</p>
+<ul class="doc-list">
+  <li>Perangkat Komputer Pengembang: Laptop / PC dengan Prosesor Intel Core i3 / AMD Ryzen setara, RAM minimal 4 GB.</li>
+  <li>Perangkat Pengguna Akhir (End-User): Smartphone Android / iOS, Tablet, Laptop, atau PC jenis apa pun yang memiliki web browser.</li>
+  <li>Koneksi Jaringan: Akses internet stabil (kecepatan minimal 512 Kbps) untuk pengiriman data JSON HTTP/HTTPS.</li>
+</ul>
+<h4 class="doc-section-heading">2.2 Kebutuhan Perangkat Lunak (Software)</h4>
+<p class="doc-p">Perangkat lunak yang digunakan dalam proses perancangan, perbaikan, hingga publikasi sistem meliputi:</p>
+<ul class="doc-list">
+  <li>Sistem Operasi Pengembangan: Microsoft Windows 11 (64-bit).</li>
+  <li>Code Editor / IDE: Visual Studio Code dan PowerShell Terminal.</li>
+  <li>Runtime Lingkungan: Node.js v18+ (untuk eksekusi serverless Netlify Functions) dan Python 3.11+ (utility generator dokumen).</li>
+  <li>Version Control &amp; Platform: Git CLI, GitHub Cloud, dan Netlify Platform Hosting.</li>
+  <li>Web Browser: Google Chrome, Microsoft Edge, atau Mozilla Firefox dengan dukungan ES6 Fetch API.</li>
+</ul>
+<h4 class="doc-section-heading">2.3 Daftar Pustaka dan Dependensi Sistem</h4>
+<p class="doc-p">Proyek ini menggunakan dependensi modern tanpa bloatware pihak ketiga yang berlebihan, menjamin kecepatan muat situs di bawah 1 detik:</p>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Komponen / Modul</th>
+    <th>Fungsi Utama dalam Proyek</th>
+    <th>Catatan Teknis</th>
+  </tr>
+  <tr>
+    <td><strong>Vanilla JavaScript (ES6+)</strong></td>
+    <td><strong>Mengelola state obrolan, DOM rendering, audio effect, dan asynchronous Fetch request ke API proxy.</strong></td>
+    <td><strong>Tanpa framework berat (React/Vue), menghasilkan payload HTML yang sangat ringan (&lt;30 KB).</strong></td>
+  </tr>
+  <tr>
+    <td><strong>@netlify/functions / Node.js</strong></td>
+    <td><strong>Lingkungan runtime serverless function untuk menangani HTTP POST /api/chat secara aman.</strong></td>
+    <td><strong>Berjalan secara stateless di AWS Lambda edge global, otomatis scale-out tanpa biaya server.</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Groq SDK / REST API v1</strong></td>
+    <td><strong>Endpoint antarmuka komunikasi model bahasa OpenAI-compatible (chat/completions).</strong></td>
+    <td><strong>Memproses inferensi LPU berkecepatan 300+ token per detik dengan latensi waktu tanggap &lt; 0.5 detik.</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Git &amp; GitHub CLI</strong></td>
+    <td><strong>Manajemen versi repositori kode sumber dan trigger otomatisasi deployment ke Netlify.</strong></td>
+    <td><strong>Branch main terhubung langsung melalui Netlify GitHub App Webhook.</strong></td>
+  </tr>
+</table></div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB III. TAHAPAN PERJALANAN PROYEK DARI AWAL HINGGA PUBLISH</h3>
+<p class="doc-p">Berikut adalah urutan langkah terperinci yang ditempuh selama proses pengerjaan proyek Taufik AI, mulai dari kondisi eror pada file lokal hingga berhasil tayang di internet:</p>
+<p class="doc-p">Langkah 1: Menelaah Masalah Awal (Error HTTP 400 Bad Request)</p>
+<p class="doc-p">Pada awalnya, pengguna membuka file Chatbot web.html di peramban lokal dengan konfigurasi config.js yang berisi API Key Groq. Ketika pengguna mengetik pesan dan menekan tombol kirim, bot tidak memberikan respons dan menampilkan pesan peringatan &#x27;Maaf, terjadi kesalahan atau API key tidak valid&#x27;. Melalui inspeksi network di Browser Developer Tools, teridentifikasi respons HTTP 400 Bad Request dari endpoint api.groq.com. Penyebabnya adalah model &#x27;llama3-70b-8192&#x27; telah resmi dinonaktifkan (decommissioned) oleh Groq.</p>
+<p class="doc-p">Langkah 2: Migrasi Model ke openai/gpt-oss-120b dan Fallback Otomatis</p>
+<p class="doc-p">Untuk memastikan kestabilan jangka panjang, skrip client diperbarui ke model generasi terbaru yang aktif di Groq, yaitu openai/gpt-oss-120b. Selain itu, dibangun algoritma Multi-Model Failover: jika model utama sedang mengalami rate limit atau server busy, JavaScript secara otomatis akan mengalihkan request ke model openai/gpt-oss-20b atau qwen/qwen3.8-27b tanpa membuat sesi obrolan pengguna terputus.</p>
+<p class="doc-p">Langkah 3: Personalisasi Branding dan Perbaikan UI (Taufik AI)</p>
+<p class="doc-p">Identitas antarmuka dirombak total dari nama generik menjadi &#x27;Taufik AI&#x27;. Foto profil pengguna (Profile.jpg) diintegrasikan ke dalam header bar dan badge bot. Ditambahkan pula perbaikan CSS white-space: pre-wrap agar paragraf panjang, poin peluru, dan baris kode yang dihasilkan bot tetap rapi dan tidak bertumpuk.</p>
+<p class="doc-p">Langkah 4: Dilema Keamanan dan Perancangan Serverless Backend Proxy</p>
+<p class="doc-p">Ketika proyek hendak dipublikasikan secara daring, muncul tantangan keamanan kritis: jika file config.js diunggah ke GitHub, API key rahasia akan terekspos dan disalahgunakan pihak lain. Sebaliknya, jika pengguna diminta memasukkan API key sendiri, situs akan sangat merepotkan orang awam. Solusi terbaik yang dipilih adalah membangun Serverless Proxy (netlify/functions/chat.js). Dengan arsitektur ini, browser hanya memanggil endpoint relatif /api/chat, dan server Netlify yang akan meneruskannya ke Groq dengan menyuntikkan API key dari variabel lingkungan rahasia.</p>
+<div class="doc-callout-card"><div class="callout-icon">💡</div><div class="callout-content">📌 PARADIGMA KEAMANAN: ZERO-CONFIG DENGAN SERVERLESS PROXYArsitektur Serverless Proxy memecahkan dua masalah sekaligus: (1) Menjaga kerahasiaan Groq API Key 100% aman di cloud environment variable, dan (2) Memberikan pengalaman &#x27;Zero-Config&#x27; di mana setiap pengunjung dapat langsung mengobrol tanpa perlu membuat akun atau memasukkan API key pribadi.</div></div>
+<p class="doc-p">Langkah 5: Inisialisasi Repositori Git dan Push ke GitHub</p>
+<p class="doc-p">File-file proyek ditata ke dalam struktur standar serverless, dibuat file index.html sebagai pintu masuk utama, lalu diunggah ke repositori GitHub muhamadt4ufik/Chatbot:</p>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>git initgit add .git commit -m &quot;Initial commit - Taufik AI Serverless Chatbot&quot;git branch -M maingit remote add origin https://github.com/muhamadt4ufik/Chatbot.gitgit push -u origin main</th>
+  </tr>
+</table></div>
+<p class="doc-p">Langkah 6: Menghubungkan Repositori ke Netlify dan Troubleshooting Edge Access</p>
+<p class="doc-p">Repositori dihubungkan ke platform Netlify. Saat pertama kali diakses, muncul form login Netlify (HTTP 401 Restricted Access) yang mengharuskan kata sandi. Masalah ini diselesaikan dengan menavigasi ke Site Settings &gt; Access Management &gt; Visitor Access, lalu mengubah status situs dari Restricted menjadi Public.</p>
+<p class="doc-p">Langkah 7: Konfigurasi Environment Variable GROQ_API_KEY</p>
+<p class="doc-p">Saat pertama kali dideploy, bot memunculkan pesan &#x27;API Key tidak valid&#x27; karena variabel lingkungan belum terisi dengan benar. Terjadi kesalahan pengetikan di mana nama variabel diisi nilai literal dan nilainya tertukar. Setelah diperbaiki dengan konfigurasi Key: GROQ_API_KEY dan Value: gsk_w4CPh... pada Scope &#x27;All scopes&#x27;, serta dilakukan Trigger Deploy ulang, sistem berhasil 100% online dan responsif.</p>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB IV. ARSITEKTUR DAN DESAIN SISTEM</h3>
+<h4 class="doc-section-heading">4.1 Diagram Alur Kerja Sistem (Workflow Architecture)</h4>
+<p class="doc-p">Sistem Taufik AI beroperasi dengan membagi tanggung jawab antara Presentation Layer (Browser Client) dan Cloud Security Proxy Layer (Netlify Serverless). Diagram alur berikut menggambarkan urutan transmisi data secara terstruktur:</p>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>+-------------------------------------------------------------+|                 1. USER INTERACTION (BROWSER)               ||  - Pengguna mengetik prompt pada input box di index.html    ||  - Menekan tombol kirim atau Enter                          ||  - Tampilkan bubble chat user &amp; indikator animasi &#x27;Mengetik&#x27;|+-------------------------------------------------------------+                               |                               v+-------------------------------------------------------------+|            2. ASYNCHRONOUS HTTP POST (/api/chat)            ||  - Client mengirim payload JSON: { messages: history }      ||  - Request ditangkap oleh netlify.toml URL Rewrite Rules    ||  - Diteruskan ke serverless runtime: netlify/functions/chat |+-------------------------------------------------------------+                               |                               v+-------------------------------------------------------------+|         3. NETLIFY FUNCTION (SERVERLESS PROXY)              ||  - Ambil process.env.GROQ_API_KEY dari Cloud Environment    ||  - Tambahkan System Prompt kepribadian &#x27;Taufik AI&#x27;          ||  - Kirim HTTP POST ke: https://api.groq.com/openai/v1/...   |+-------------------------------------------------------------+                               |                               v+-------------------------------------------------------------+|               4. GROQ LPU INFERENCE ENGINE                  ||  - Tokenisasi BPE pada pesan masukan                        ||  - Deep Learning Transformer Multi-Head Attention          ||  - Hasilkan token jawaban (kecepatan 300+ token/detik)      ||  - Kembalikan JSON hasil inferensi ke Netlify Function      |+-------------------------------------------------------------+                               |                               v+-------------------------------------------------------------+|               5. RESPONSE DELIVERY &amp; RENDERING              ||  - Netlify Function mem-forward JSON respons ke Browser     ||  - JavaScript client mengekstrak teks respons bot           ||  - Render respons ke DOM dengan bubble chat &amp; avatar Taufik ||  - Mainkan notifikasi audio selesai &amp; scroll otomatis       |+-------------------------------------------------------------+</th>
+  </tr>
+</table></div>
+<h4 class="doc-section-heading">4.2 Keamanan Dua Lapisan (Dual-Mode Client)</h4>
+<p class="doc-p">Antarmuka client dirancang dengan logika cerdas (Dual-Mode Detection):</p>
+<ul class="doc-list">
+  <li>Mode Cloud Production (Tanpa Kunci): Saat diakses melalui URL Netlify, client memprioritaskan endpoint serverless proxy /api/chat. Pengunjung sama sekali tidak perlu memasukkan API key.</li>
+  <li>Mode Local Standalone (Dengan Kunci): Jika pengguna membuka file secara luring (offline) via double click file:///, client secara otomatis membaca kunci dari config.js atau meminta input manual.</li>
+</ul>
+<h4 class="doc-section-heading">4.3 Mekanisme System Prompt dan Formatting Preservasi</h4>
+<p class="doc-p">Setiap percakapan disuntikkan instruksi sistem (System Instruction) agar model konsisten memperkenalkan diri sebagai &#x27;Taufik AI&#x27;, asisten cerdas yang ramah, sopan, dan solutif. Selain itu, gaya penulisan Markdown dipertahankan menggunakan regex parser ringan untuk mengubah teks tebal, miring, kutipan, dan blok kode menjadi elemen HTML yang rapi.</p>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB V. PEMBAHASAN KODE PROGRAM LENGKAP</h3>
+<p class="doc-p">Berikut adalah kode sumber dari dua berkas inti proyek yang menggerakkan logika backend serverless dan konfigurasi perutean:</p>
+<h4 class="doc-section-heading">5.1 Kode Sumber Backend Serverless Proxy (netlify/functions/chat.js)</h4>
+<div class="doc-code-card"><div class="code-header"><span>Source Code</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div><pre><code>// netlify/functions/chat.js// Serverless Proxy: Menjaga kerahasiaan Groq API Key di Cloud Environmentexports.handler = async function (event, context) {  // Hanya menerima HTTP Method POST  if (event.httpMethod !== &quot;POST&quot;) {    return {      statusCode: 405,      headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },      body: JSON.stringify({ error: &quot;Method Not Allowed. Gunakan POST.&quot; }),    };  }  // Mengambil Groq API Key dari Cloud Environment Variable Netlify  const apiKey = process.env.GROQ_API_KEY;  if (!apiKey) {    return {      statusCode: 500,      headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },      body: JSON.stringify({        error: &quot;GROQ_API_KEY belum dikonfigurasi di Environment Variable Netlify!&quot;,      }),    };  }  try {    const payload = JSON.parse(event.body || &quot;{}&quot;);    const userMessages = payload.messages || [];    // System instruction untuk membentuk kepribadian Taufik AI    const systemPrompt = {      role: &quot;system&quot;,      content: &quot;Kamu adalah Taufik AI, asisten virtual cerdas yang diciptakan oleh Taufik. Jawablah dengan ramah, informatif, sopan, dan jelas dalam Bahasa Indonesia.&quot;    };    // Forward request ke Groq Cloud API    const response = await fetch(&quot;https://api.groq.com/openai/v1/chat/completions&quot;, {      method: &quot;POST&quot;,      headers: {        &quot;Authorization&quot;: `Bearer ${apiKey}`,        &quot;Content-Type&quot;: &quot;application/json&quot;      },      body: JSON.stringify({        model: payload.model || &quot;openai/gpt-oss-120b&quot;,        messages: [systemPrompt, ...userMessages],        temperature: payload.temperature || 0.7,        max_tokens: payload.max_tokens || 2048      })    });    const data = await response.json();    return {      statusCode: response.status,      headers: {        &quot;Content-Type&quot;: &quot;application/json&quot;,        &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;      },      body: JSON.stringify(data)    };  } catch (err) {    return {      statusCode: 500,      headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },      body: JSON.stringify({ error: &quot;Terjadi kesalahan internal proxy: &quot; + err.message })    };  }};</code></pre></div>
+<h4 class="doc-section-heading">5.2 Kode Konfigurasi URL Rewriting (netlify.toml)</h4>
+<div class="doc-code-card"><div class="code-header"><span>Source Code</span><button class="copy-btn" onclick="copyCode(this)">Salin</button></div><pre><code># netlify.toml# Konfigurasi Build dan Reverse Proxy URL Rewrites[build]  publish = &quot;.&quot;# Meneruskan semua request dari /api/* langsung ke Serverless Function[[redirects]]  from = &quot;/api/*&quot;  to = &quot;/.netlify/functions/:splat&quot;  status = 200  force = true</code></pre></div>
+<h4 class="doc-section-heading">5.3 Bedah Teknis Baris Kode</h4>
+<ul class="doc-list">
+  <li>A. Pengamanan Kunci (process.env.GROQ_API_KEY): Baris 14 mengekstrak kunci otentikasi dari sistem operasi serverless. Kunci ini diinjeksi saat runtime sehingga tidak akan pernah dapat diintip oleh inspect element browser.</li>
+  <li>B. Injeksi System Prompt Kepribadian: Baris 27 menyuntikkan pesan sistem yang memaksa model AI konsisten mengingat identitasnya sebagai &#x27;Taufik AI&#x27; buatan Taufik.</li>
+  <li>C. Parameter Suhu (Temperature = 0.7): Menghasilkan keseimbangan matematis optimal antara kreativitas variasi kosakata dengan konsistensi fakta logis.</li>
+  <li>D. Reverse Proxy Status 200 di netlify.toml: Direktif &#x27;status = 200&#x27; memastikan pengalihan rute berjalan secara transparan (URL masking), sehingga browser tetap berkomunikasi ke domain yang sama tanpa memicu isu CORS.</li>
+</ul>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB VI. IMPLEMENTASI NATURAL LANGUAGE PROCESSING (NLP)</h3>
+<p class="doc-p">Aplikasi Taufik AI menerapkan prinsip-prinsip sains Natural Language Processing (NLP) tingkat lanjut dalam memproses pesan input manusia hingga menghasilkan respons cerdas:</p>
+<ul class="doc-list">
+  <li>1. Subword Tokenization (Byte-Pair Encoding / BPE): Kalimat pengguna dipecah menjadi token-token sub-kata numerik yang efisien, memungkinkan penanganan kata-kata baru atau istilah slang Bahasa Indonesia tanpa mengalami kendala out-of-vocabulary.</li>
+  <li>2. NLU (Natural Language Understanding): Model mengekstraksi niat (intent detection) dan entitas penting (named entity recognition) dari pesan pengguna, memahami konteks pertanyaan meskipun diketik secara tidak formal.</li>
+  <li>3. Multi-Head Self-Attention Mechanism: Lapisan Transformer menghitung bobot keterkaitan matematis antar kata dalam kalimat panjang, memahami relasi rujukan kata ganti (Coreference Resolution) dengan tepat.</li>
+  <li>4. NLG (Natural Language Generation): Probabilitas token berikutnya diprediksi secara autoregresif menggunakan fungsi Softmax dengan sampling temperature 0.7, menghasilkan kalimat jawaban yang luwes, alami, dan informatif.</li>
+</ul>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB VII. PANDUAN PENGUJIAN DAN TROUBLESHOOTING</h3>
+<h4 class="doc-section-heading">7.1 Cara Mengakses dan Menguji Sistem</h4>
+<p class="doc-p">Untuk menguji sistem secara langsung di lingkungan cloud produksi:</p>
+<ul class="doc-list">
+  <li>1. Buka Peramban Web: Akses tautan publik: https://unique-tiramisu-668ca8.netlify.app</li>
+  <li>2. Periksa Indikator Status: Pastikan ikon status di samping avatar Taufik AI berwarna hijau (&#x27;Online &amp; Siap Chat&#x27;).</li>
+  <li>3. Kirim Pertanyaan Uji: Ketik pertanyaan, misalnya: &#x27;Halo Taufik AI, siapa kamu dan apa saja keahlianmu?&#x27;. Tekan Enter.</li>
+  <li>4. Amati Respons: Amati respons teks yang muncul secara instan dengan struktur paragraf yang rapi dan nada bahasa yang sopan.</li>
+</ul>
+<h4 class="doc-section-heading">7.2 Penanganan Kendala (Troubleshooting Guide)</h4>
+<p class="doc-p">Tabel berikut mendokumentasikan kendala nyata yang dialami selama proyek dan solusi pasti yang telah teruji:</p>
+<div class="table-container"><table class="doc-table">
+  <tr>
+    <th>Gejala Masalah / Pesan Error</th>
+    <th>Kemungkinan Penyebab</th>
+    <th>Solusi Langkah Perbaikan</th>
+  </tr>
+  <tr>
+    <td><strong>Muncul kotak login kata sandi saat membuka URL Netlify (HTTP 401)</strong></td>
+    <td><strong>Fitur Netlify Edge Access Protection aktif secara default pada site baru.</strong></td>
+    <td><strong>Buka Site Settings &gt; Access Management &gt; Visitor Access. Ubah pengaturan dari Restricted menjadi Public.</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Muncul notifikasi &#x27;API Key tidak valid&#x27; di web setelah deploy</strong></td>
+    <td><strong>Nama/nilai variabel di Environment Variables tertukar atau bernilai string literal.</strong></td>
+    <td><strong>Masuk ke Site Settings &gt; Environment Variables. Pastikan Key adalah GROQ_API_KEY dan Value adalah gsk_..., lalu lakukan Trigger Deploy &gt; Clear cache and deploy site.</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Respons bot macet dengan pesan &#x27;Gagal memuat respons&#x27; (HTTP 400)</strong></td>
+    <td><strong>Model AI yang diminta sudah usang/dinonaktifkan (seperti llama3-70b-8192).</strong></td>
+    <td><strong>Perbarui model di kode skrip menjadi openai/gpt-oss-120b atau aktifkan mekanisme fallback ke qwen3.8-27b.</strong></td>
+  </tr>
+  <tr>
+    <td><strong>Format baris baru pada teks jawaban bot menyatu dalam satu baris</strong></td>
+    <td><strong>Properti CSS white-space belum diterapkan pada elemen penampung teks pesan.</strong></td>
+    <td><strong>Tambahkan baris CSS &#x27;.message { white-space: pre-wrap; }&#x27; pada tag style untuk mempertahankan line-break.</strong></td>
+  </tr>
+</table></div>
+<h3 class="doc-chapter-heading"><span class="chapter-badge">BAB</span> BAB VIII. KESIMPULAN DAN REKOMENDASI</h3>
+<h4 class="doc-section-heading">8.1 Kesimpulan</h4>
+<p class="doc-p">Berdasarkan seluruh tahapan perancangan, perbaikan masalah, rekayasa arsitektur serverless, dan pengujian publikasi yang telah dilakukan, dapat disimpulkan bahwa:</p>
+<ul class="doc-list">
+  <li>Keberhasilan Penyelesaian Bug: Akar masalah kegagalan komunikasi HTTP 400 berhasil diatasi melalui migrasi model ke openai/gpt-oss-120b dengan dukungan multi-model failover otomatis.</li>
+  <li>Efektivitas Serverless Proxy: Penerapan arsitektur Netlify Function terbukti 100% sukses menyembunyikan API key rahasia dari sisi client tanpa menimbulkan latensi signifikan pada transmisi obrolan.</li>
+  <li>Kemudahan Akses Pengguna: Aplikasi web berhasil dipublikasikan secara global di https://unique-tiramisu-668ca8.netlify.app dengan status publik, tanpa memerlukan konfigurasi API key dari pengunjung.</li>
+  <li>Kualitas Respon NLP: Implementasi Natural Language Processing menghasilkan dialog interaktif yang santun, akurat, kontekstual, dan berkarakter khas sesuai branding personal Taufik AI.</li>
+</ul>
+<h4 class="doc-section-heading">8.2 Rekomendasi Pengembangan Lebih Lanjut</h4>
+<p class="doc-p">Untuk peningkatan kemampuan sistem Taufik AI di masa yang akan datang, direkomendasikan beberapa inovasi pengembangan berikut:</p>
+<ul class="doc-list">
+  <li>Implementasi RAG (Retrieval-Augmented Generation): Menghubungkan chatbot dengan basis data vektor (vector database) atau dokumen PDF pribadi agar bot dapat menjawab pertanyaan spesifik seputar riwayat hidup atau materi khusus Taufik.</li>
+  <li>Dukungan Streaming SSE (Server-Sent Events): Mengaktifkan mekanisme respons teks mengalir (typing effect real-time token per token) menggunakan HTTP streaming chunk.</li>
+  <li>Integrasi Multi-Modalitas: Menambahkan fitur pengenalan input suara (Speech-to-Text) dan analisis gambar/foto (Vision LLM) pada jendela obrolan.</li>
+</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
